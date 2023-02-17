@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Страница добавления группы
+{% endblock %}
+
+{% block content %}
+<form  method="post" class="container mt-5">
+    {% csrf_token %}
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+
+            <table class="table bg-white rounded border">
+                <thead>
+                    <tr class="align-middle text-center">
+                        <th scope="col" class="">#</th>
+                        <th scope="col" class="">Название группы</th>
+                        <th scope="col" class="">Формат обучения</th>
+                        <th scope="col" class="">Программа обучения</th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr class="col-12 align-middle text-center">
+                            <th scope="row">#</th>
+                            <td class="col-4 ">{{ form.name }}</td>
+                            <td class="col-4 ">{{ form.format_learning_id }}</td>
+                            <td class="col-4 ">{{ form.program_learning_id }}</td>
+                            <td class="col-2 "><button   type="submit" class="btn btn-outline-dark p-1">Изменить</button></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+{% endblock %}

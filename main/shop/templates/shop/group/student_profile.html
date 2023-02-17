@@ -1,0 +1,61 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Страница профиля студента
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-3">
+    <form class="row">
+        @if (Model.Student.User.Photo == null)
+        {
+            <div class="col-md-3 ">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"></div>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3 ">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="@Model.Student.User.Photo"></div>
+            </div>
+        }
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-4"><label class="labels">Фамилия</label><input asp-for="@Model.Student.User.Surname" type="text" class="form-control" placeholder="Фамилия" readonly></div>
+                    <div class="col-md-4"><label class="labels">Имя</label><input asp-for="@Model.Student.User.Name" type="text" class="form-control" placeholder="Имя" readonly></div>
+                    <div class="col-md-4"><label class="labels">Отчество</label><input asp-for="@Model.Student.User.Patronymic" type="text" class="form-control" placeholder="Отчество" readonly></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4"><label class="labels">Номер телефона</label><input asp-for="@Model.Student.User.PhoneNumber" type="text" class="form-control" placeholder="79998887766" readonly></div>
+                    <div class="col-md-6"><label class="labels">Email</label><input asp-for="@Model.Student.User.Email" type="text" class="form-control" placeholder="poshta@mail.ru" readonly></div>
+                    <div class="col-md-2"><label class="labels">Группа</label><input asp-for="@Model.Student.Group.NameGroup" type="text" class="form-control" placeholder="" readonly></div>
+                    <label class="labels my-3 "><strong>Паспортные данные</strong></label>
+                    <div class="col-md-4"> <label class="labels">Серия</label><input asp-for="@Model.Student.User.Passport.Series" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-4"><label class="labels">Номер</label><input asp-for="@Model.Student.User.Passport.Number" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-4"><label class="labels">Дата выдачи</label><input asp-for="@Model.Student.User.Passport.DateOfIssue" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-9 mt-2"><label class="labels">Кем выдан</label><input asp-for="@Model.Student.User.Passport.IssuedBy" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-3 mt-2"><label class="labels">Дата рождения</label><input asp-for="@Model.Student.User.Passport.DateOfBirth" type="text" class="form-control" placeholder="" readonly></div>
+                    <label class="labels my-3 "><strong>Место рождения</strong></label>
+                    <div class="col-md-3 mt-2"><label class="labels">Страна</label><input asp-for="@Model.Student.User.PlaceOfResidence.Country" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-3 mt-2"><label class="labels">Город</label><input asp-for="@Model.Student.User.PlaceOfResidence.City" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-2 mt-2"><label class="labels">Улица</label><input asp-for="@Model.Student.User.PlaceOfResidence.TheOutside" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-2 mt-2"><label class="labels">Дом</label><input asp-for="@Model.Student.User.PlaceOfResidence.House" type="text" class="form-control" placeholder="" readonly></div>
+                    <div class="col-md-2 mt-2"><label class="labels">Квартира</label><input asp-for="@Model.Student.User.PlaceOfResidence.Flat" type="text" class="form-control" placeholder="" readonly></div>
+                </div>
+                @if (Model.id == 1)
+                {
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Роль</label><input asp-for="@Model.Student.User.Role.Name" type="text" class="form-control" placeholder="" readonly></div>
+                        <div class="col-md-6"><label class="labels">Должность</label><input asp-for="@Model.Student.User.Post" type="text" class="form-control" placeholder="" readonly></div>
+                    </div>
+                }
+                <div class="mt-5 text-center"><a href="/Group/StudentProfileEditPage?id=@Model.Student.IdStudent" class="btn btn-primary profile-button" type="submit">Изменить профиль</a></div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

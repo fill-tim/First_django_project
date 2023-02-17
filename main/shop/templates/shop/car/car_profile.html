@@ -1,0 +1,50 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Профиль автомобиля
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-3">
+    <div class="container col-md-10 ">
+      <form action="{% url 'car_profile' model.car_id.id %}" method="post" class="row" enctype="multipart/form-data">
+        {% csrf_token %}
+         {% if model.car_id.photo == '' %}
+                <div class="col-md-3 ">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://avatars.mds.yandex.net/i?id=73b4bfb589b8a8fe988fb3300fea84353f2bf94c-7754910-images-thumbs&n=13" alt="..."></div>
+                    <label>Фотография</label><input type="file" accept="image/*" name="photo">
+                </div>
+          {% else %}
+                <div class="col-md-3 ">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ model.car_id.photo.url }}" alt="..."></div>
+                    <label>Фотография</label><input type="file" accept="image/*" name="photo">
+                </div>
+          {% endif %}
+            <div class="col-md-8 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <label class="labels my-3 "><strong>Владелец</strong></label>
+                    <div class="row mt-2">
+                        <div class="col-md-4"><label>Фамилия</label><input class="form-control rounded" type="text" name="surname" value="{{ model.user_id.surname }}" ></div>
+                        <div class="col-md-4"><label>Имя</label><input class="form-control rounded" type="text" name="name" value="{{ model.user_id.name }}" ></div>
+                        <div class="col-md-4"><label>Отчество</label><input class="form-control rounded" type="text" name="patronymic" value="{{ model.user_id.patronymic }}" ></div>
+                    </div>
+                    <div class="row mt-3">
+                        <label class="labels my-3 "><strong>Данные по машине</strong></label>
+                        <div class="col-md-4"><label>Номер автомобиля</label><input class="form-control rounded" type="text" name="number_car" value="{{ model.car_id.number }}" ></div>
+                        <div class="col-md-4"><label>Цвет</label><input class="form-control rounded" type="text" name="color" value="{{ model.car_id.color }}" ></div>
+                        <div class="col-md-4"><label>Коробка передач</label><input class="form-control rounded" type="text" name="transmission" value="{{ model.car_id.transmission_id.name }}" ></div>
+
+                        <div class="col-md-6"><label>Модель</label><input class="form-control rounded" type="text" name="model" value="{{ model.car_id.model_id.name }}" ></div>
+                        <div class="col-md-6"><label>Марка</label><input class="form-control rounded" type="text" name="brand" value="{{ model.car_id.model_id.brand_id.name }}" ></div>
+                    </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Изменить профиль</button></div>
+                    <div>{{ form.non_field_errors }}</div>
+                </div>
+            </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Страница групп
+{% endblock %}
+
+{% block content %}
+<form class="container mt-5" method="post">
+    <div class="row">
+            <div class="col-md-8 mx-auto">
+                <table class="table bg-white rounded border">
+                    <thead>
+                        <tr class="align-middle text-center">
+                            <th scope="col" class="">#</th>
+                            <th scope="col" class="">Название группы</th>
+                            <th scope="col" class="">Формат обучения</th>
+                            <th scope="col" class="">Программа обучения</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            {% if user.is_staff %}
+                            <th scope="col"><a href="{% url 'group_add' %}" class="btn btn-outline-dark p-1">Добавить</a></th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for elem in model %}
+                            <tr class="col-12 align-middle text-center">
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td class="col-4 ">{{ elem.name }}</td>
+                                <td class="col-4 ">{{ elem.format_learning_id.name }}</td>
+                                <td class="col-4 ">{{ elem.program_learning_id.category }}</td>
+                                {% if user.is_staff %}
+                                    <td class="col-2 "><a href="{% url 'group_profile' elem.id %}" class="btn btn-outline-dark p-1">Профиль</a></td>
+                                    <td class="col-2 "><a href="{% url 'group_edit' elem.pk %}" class="btn btn-outline-dark p-1">Изменить</a></td>
+                                    <td class="col-2 "><a href="{% url 'group_delete' elem.pk %}" class="btn btn-outline-dark p-1" >Удалить</a></td>
+                                {% else %}
+                                    <td class="col-2 "></td>
+                                    <td class="col-2 "></td>
+                                    <td class="col-2 "></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</form>
+{% endblock %}

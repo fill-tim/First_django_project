@@ -1,0 +1,47 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Страница
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-3">
+    <form class="row" action="{% url 'profile' model.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {% if not model.photo %}
+            <div class="col-md-3 ">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"></div>
+             <div>Фотография<input name="photo" type="file"></div>
+            </div>
+        {% else %}
+            <div class="col-md-3 ">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ model.photo.url }}"></div>
+                <div>Фотография<input name="photo" type="file"></div>
+            </div>
+        {% endif %}
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-4"><label class="labels">Фамилия</label><input value="{{ model.surname }}" name="surname" type="text" class="form-control" placeholder="Фамилия" ></div>
+                    <div class="col-md-4"><label class="labels">Имя</label><input value="{{ model.name }}" name="name" type="text" class="form-control" placeholder="Имя" ></div>
+                    <div class="col-md-4"><label class="labels">Отчество</label><input value="{{ model.patronymic }}" name="patronymic" type="text" class="form-control" placeholder="Отчество" ></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Номер телефона</label><input value="{{ model.phone }}" name="phone" type="text" class="form-control" placeholder="79998887766" ></div>
+                    <div class="col-md-6"><label class="labels">Email</label><input value="{{ model.email }}" name="email" type="email" class="form-control" placeholder="poshta@mail.ru" ></div>
+                    <label class="labels my-3 "><strong>Паспортные данные</strong></label>
+                    <div class="col-md-4"> <label class="labels">Серия</label><input value="{{ model.passport_id.series }}" name="series" type="text" class="form-control" placeholder="" ></div>
+                    <div class="col-md-4"><label class="labels">Номер</label><input value="{{ model.passport_id.number }}" name="number" type="text" class="form-control" placeholder="" ></div>
+                    <div class="col-md-4"><label class="labels">Дата выдачи</label><input value="{{ model.passport_id.date_of_issue }}" name="date_of_issue" type="date" class="form-control" placeholder="" ></div>
+                    <div class="col-md-9 mt-2"><label class="labels">Кем выдан</label><input value="{{ model.passport_id.issued_by }}" name="issued_by" type="text" class="form-control" placeholder="" ></div>
+                    <div class="col-md-3 mt-2"><label class="labels">Дата рождения</label><input value="{{ model.passport_id.date_of_birth }}" name="date_of_birth" type="date" class="form-control" placeholder="" ></div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Изменить профиль</button></div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

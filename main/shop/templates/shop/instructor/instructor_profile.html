@@ -1,0 +1,59 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Профиль
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4 mb-3">
+        <form action="{% url 'instructor_profile' model.id %}"  enctype="multipart/form-data" method="post" class="row">
+            {% csrf_token %}
+            {% if model.user_id.photo %}
+                <div class="col-md-3 ">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ model.user_id.photo.url }}" alt="..."></div>
+                    <label>Фотография</label><input type="file" accept="image/*" name="photo">
+                </div>
+            {% else %}
+                <div class="col-md-3 ">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px"
+                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        <label>Фотография</label><input type="file" accept="image/*" name="photo">
+                    </div>
+                </div>
+            {% endif %}
+            <div class="col-md-8 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <div class="row">
+                            <div class="row mt-2">
+                                <div class="col-md-4"><label>Фамилия</label><input class="form-control rounded" type="text" name="surname" value="{{ model.user_id.surname }}" ></div>
+                                <div class="col-md-4"><label>Имя</label><input class="form-control rounded" type="text" name="name" value="{{ model.user_id.name }}" ></div>
+                                <div class="col-md-4"><label>Отчество</label><input class="form-control rounded" type="text" name="patronymic" value="{{ model.user_id.patronymic }}" ></div>
+                            </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4"><label class="labels">Номер телефона</label><input value="{{ model.user_id.phone }}" name="phone" type="text" class="form-control" placeholder="79998887766" ></div>
+                            <div class="col-md-4"><label class="labels">Email</label><input value="{{ model.user_id.email }}" name="email" type="email" class="form-control" placeholder="poshta@mail.ru" ></div>
+                            <div class="col-md-4"><label class="labels">Номер машины</label><input value="{{ model.car_id.number }}" name="number_car" type="text" class="form-control" placeholder="" ></div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                            <label class="labels my-3 "><strong>Паспортные данные</strong></label>
+                            <div class="col-md-4"> <label class="labels">Серия</label><input value="{{ model.user_id.passport_id.series }}" name="series" type="text" class="form-control" placeholder="" ></div>
+                            <div class="col-md-4"><label class="labels">Номер</label><input value="{{ model.user_id.passport_id.number }}" name="number" type="text" class="form-control" placeholder="" ></div>
+                            <div class="col-md-4"><label class="labels">Дата выдачи</label><input value="{{ model.user_id.passport_id.date_of_issue }}" name="date_of_issue" type="date" class="form-control" placeholder="" ></div>
+                            <div class="col-md-8 mt-2"><label class="labels">Кем выдан</label><input value="{{ model.user_id.passport_id.issued_by }}" name="issued_by" type="text" class="form-control" placeholder=""></div>
+                            <div class="col-md-4 mt-2"><label class="labels">Дата рождения</label><input value="{{ model.user_id.passport_id.date_of_birth }}" name="date_of_birth" type="date" class="form-control" placeholder="" ></div>
+                    </div>
+                    <input type="hidden"/>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="submit">Изменить профиль</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {{ error }}
+    </div>
+{% endblock %}

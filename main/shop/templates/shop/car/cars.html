@@ -1,0 +1,60 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+  Автомобили
+{% endblock %}
+
+{% block content %}
+<section class="py-3 text-center container">
+        <div class="row py-lg-3">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="">Автомобили</h1>
+                <p class="lead text-dark"> нашей автошколе используются только исправные автомобили и постоянно проверяются на наличие поломок.</p>
+            </div>
+        </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row row-cols-md-3  justify-content-center">
+            {% for elem in car %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    {% if elem.car_id.photo == '' %}
+                        <img class="card-img-top" height="300" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+                    {% else %}
+                        <img class="card-img-top" height="300" src="{{ elem.car_id.photo.url }}" alt="...">
+                    {% endif %}
+                    <div class="card-body p-4">
+                        <div class="text-center">
+
+                            <p>
+                               <strong>Фирма:</strong> {{ elem.car_id.model_id.brand_id.name }};
+                               <strong>Модель:</strong> {{ car_id.model_id.name }};
+
+                            </p>
+                            <p>
+                                <strong>Трансмиссия: </strong> {{ elem.car_id.transmission_id.name }};
+                            <p>
+                               <strong>Цвет:</strong> {{ elem.car_id.color }};
+                            </p>
+                               <p>
+                               <strong>Номер</strong> {{ elem.car_id.number }};
+                               </p>
+                            </p>
+                            <p>
+                                <strong>Владелец:</strong> {{ elem.user_id.surname }} {{ elem.user_id.name }} {{ elem.user_id.patronymic }}
+                            </p>
+                        </div>
+                    </div>
+                        {% if user.is_staff %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="profile/{{ elem.car_id.id }}" class="btn btn-outline-dark mb-2 ms-2">Профиль</a>
+                            </div>
+                        {% endif %}
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

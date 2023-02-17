@@ -1,0 +1,38 @@
+{% extends 'shop/base.html'%}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block content %}
+
+<div class="container ">
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center" style="max-width: 700px;">
+      <h1 class="display-3 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Цены</font></font></h1>
+      <p class="fs-5 text-grey"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">В нашей автошколе имеются услуги по 3 категориям: B(МККП), B(АККП) и А. </font><font style="vertical-align: inherit;">Имеется большой выбор автомобилей и инструкторов и свой собственный автодром.</font></font></p>
+    </div>
+<main>
+    <div class="row row-cols-1 row-cols-md-3 mb-5 text-center">
+    {% for elem in program %}
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal text-dark"><font style="vertical-align: inherit;">{{elem.category}}</font></h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{elem.cost}} полный курс</font></font></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Курс по теории</font></font></li>
+                        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">37 занятий практики по 2 часа</font></font></li>
+                        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Экзамены теория и практика</font></font></li>
+                        <li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Документы об окончании автокшколы</font></font></li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn btn-outline-dark " ><font style="vertical-align: inherit;">Начать</font></button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</main>
+</div>
+{% endblock %}

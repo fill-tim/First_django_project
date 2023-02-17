@@ -1,0 +1,13 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    Страница
+{% endblock %}
+
+{% block content %}
+    <form class="container mt-5 text-center" method="post">
+        {% csrf_token %}
+        <p>Вы точно хотите удалить группу "{{ group.name }}"?</p>
+        <input type="submit" value="Удалить">
+    </form>
+{% endblock %}
