@@ -125,16 +125,6 @@ class InstructorAddForm(Form):
             }
         )
     )
-    password = CharField(
-        label='Пароль',
-        required=False,
-        widget=PasswordInput(
-            attrs={
-                'class': 'form-control rounded '
-            }
-        )
-    )
-
 
 class GroupAddForm(ModelForm):
     def __init__(self, *args, **kwargs):
